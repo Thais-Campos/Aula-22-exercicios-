@@ -9,6 +9,7 @@ CREATE TABLE tb_classes (
     habilidadeEspecial VARCHAR(255) NOT NULL
 );
 
+-- INSERINDO AS CLASSES 
 INSERT INTO tb_classes (nome, habilidadeEspecial) VALUES
 ("Deus da Guerra", "Força Titânica"),          
 ("Arqueiro Jötunn", "Flechas Rúnicas"),        
@@ -16,6 +17,7 @@ INSERT INTO tb_classes (nome, habilidadeEspecial) VALUES
 ("Sábio Imortal", "Conhecimento Proibido"),    
 ("Deus do Trovão", "Martelo Mjolnir");
 
+-- CRIANDO TABELA PERSONAGENS 
 CREATE TABLE tb_personagens (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
@@ -26,6 +28,7 @@ CREATE TABLE tb_personagens (
     FOREIGN KEY (classeid) REFERENCES tb_classes(id)
 );
 
+-- INSERINDO OS PERSONAGENS 
 INSERT INTO tb_personagens (nome, poderAtaque, poderDefesa, nivel, classeid) VALUES
 ("Kratos", 3500, 2500, 50, 1),
 ("Atreus", 2000, 1500, 35, 2),
@@ -33,15 +36,19 @@ INSERT INTO tb_personagens (nome, poderAtaque, poderDefesa, nivel, classeid) VAL
 ("Mímir", 500, 800, 20, 4),
 ("Thor", 4000, 2800, 55, 5);
 
+-- MOSTRA O PERSONAGEM COM PODER DE ATAQUE MAIOR QUE 2000
 SELECT * FROM tb_personagens
 WHERE poderAtaque > 2000;
 
+-- MOSTRA O PODER DE DEFESA ENTRE 1000 E 2000
 SELECT * FROM tb_personagens
 WHERE poderDefesa BETWEEN 1000 AND 2000;
 
+-- MOSTRA OS PERSONAGENS QUE TEM A LETRA C NO NOME 
 SELECT * FROM tb_personagens
 WHERE nome LIKE "%C%";
 
+-- INNER JOIN ENTRE PERSONAGENS E CLASSES 
 SELECT p.nome, p.poderAtaque, p.poderDefesa, p.nivel, c.nome AS classe, c.habilidadeEspecial
 FROM tb_personagens p
 INNER JOIN tb_classes c ON p.classeid = c.id;
